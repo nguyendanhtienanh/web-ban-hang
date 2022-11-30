@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css">
+</head>
+
+<body onload="cart()">
+    <div id="app">
+        <!-- Header -->
+        <div id="header">
+
+            <ul id="nav">
+                <li><a href="./index.html">Trang chủ</a></li>
+                <li><a href="#">Sản phẩm</a></li>
+                <li><a href="#">Liên hệ</a></li>
+                <li><a href="#">Giới thiệu</a></li>
+            </ul>
+
+            <div class="search">
+                <input type="text" class="search-content" placeholder="Tìm kiếm sản phẩm...">
+                <i class="search-btn ti-search"></i>
+            </div>
+
+            <div class="cart">
+                <div class="cart-btn">
+                    <i class="ti-bag"></i>
+                    Giỏ Hàng
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Content -->
+
+        <div id="content-cart">
+            <div class="list-item">
+                <p class="header-list-item">Danh sách sản phẩm</p>
+                <table class="products">
+                    <thead class="head-product">
+                        <tr>
+                            <td>Hình ảnh</td>
+                            <td>Tên sản phẩm</td>
+                            <td>Giá tiền</td>
+                            <td>Số lượng</td>
+                            <td>Thành tiền</td>
+                            <td>Thao tác</td>
+                        </tr>
+                    </thead>
+                    <tbody class="body-product">
+                        
+                    </tbody>
+                </table>
+
+                <div class="total-item">
+                
+                </div>
+            </div>
+
+            <div class="table-buy">
+                <div class="table-buy-container">
+                    <div class="table-buy-content">
+                        <div class="info nameUser">
+                            <label class="info-label" for="">Họ và tên</label>
+                            <div class="info-name">
+                                <input type="text" placeholder="Họ" class="first-name">
+                                <input type="text" placeholder="Tên" class="last-name">
+                            </div>
+                            <p class="warning warning-name">Nhập họ và tên của bạn!</p>
+                        </div>
+                        <div class="info">
+                            <label class="info-label" for="">Email</label>
+                            <input class="info-input email" type="email" placeholder="Email">
+                            <p class="warning warning-mail">Nhập email của bạn!</p>
+                        </div>
+                        <div class="info">
+                            <label class="info-label" for="">Số điện thoại</label>
+                            <input class="info-input phone" type="tel" placeholder="Số điện thoại">
+                            <p class="warning warning-phone">Nhập số điện thoại của bạn!</p>
+                        </div>
+                        <div class="info address">
+                            <label class="info-label" for="">Địa chỉ</label>
+                            <select class="info-select province" onchange="getDistrictsByProvinceID()">
+                                <option value=''>Chọn Tỉnh</option>
+                            </select>
+                            <p class="warning warning-province">Chọn Tỉnh của bạn!</p>
+                            <select class="info-select district" onchange="getWardsByDistrictsID()">
+                                <option value=''>Chọn Huyện</option>
+                            </select>
+                            <p class="warning warning-district">Chọn Huyện của bạn!</p>
+                            <select class="info-select ward">
+                                <option value=''>Chọn Xã</option>
+                            </select>
+                            <p class="warning warning-ward">Chọn Xã của bạn!</p>
+                            <input class="info-input addressUser" type="text" placeholder="địa chỉ">
+                            <p class="warning warning-address">Nhập địa chỉ của bạn!</p>
+                        </div>
+                        <div class="info">
+                            <label class="info-label" for="">Lời nhắn</label>
+                            <textarea class="info-textarea note" scols="30" rows="1"></textarea>
+                        </div>
+                    </div>
+                    <div class="table-buy-btn">
+                        <button class="btn btn-accept" onclick="validate()">Xác nhận</button>
+                        <button class="btn btn-exit" onclick="hanldBtnExitBuy()">Hủy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/validate.js"></script>
+    <script src="./assets/js/cart.js"></script>
+    <script src="./assets/js/formBuy.js"></script>
+</body>
+</html>
