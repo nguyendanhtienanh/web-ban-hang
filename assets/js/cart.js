@@ -81,11 +81,14 @@ function handlTotal() {
 }
 
 function btnDeleteItem(id) {
-    const dataCart = JSON.parse(localStorage.getItem(keyLocalStorageItemCart))
-    let newData = dataCart.filter(i => i.id !== id)
-    localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(newData))
-    showProduct();
-    handlTotal();
+        const check = confirm("Xóa sản phẩm khỏi giỏ hàng?");
+        const dataCart = JSON.parse(localStorage.getItem(keyLocalStorageItemCart))
+        let newData = dataCart.filter(i => i.id !== id)
+        if(check) {
+            localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(newData))
+        } else return;
+        showProduct();
+        handlTotal();
 }
 
 function btnUpItem(id, max) {

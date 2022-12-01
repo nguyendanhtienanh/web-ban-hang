@@ -67,36 +67,36 @@
                         <div class="info nameUser">
                             <label class="info-label" for="">Họ và tên</label>
                             <div class="info-name">
-                                <input type="text" placeholder="Họ" class="first-name">
-                                <input type="text" placeholder="Tên" class="last-name">
+                                <input type="text" placeholder="Họ" class="first-name" onchange="checkValidate()">
+                                <input type="text" placeholder="Tên" class="last-name" onchange="checkValidate()">
                             </div>
                             <p class="warning warning-name">Nhập họ và tên của bạn!</p>
                         </div>
                         <div class="info">
                             <label class="info-label" for="">Email</label>
-                            <input class="info-input email" type="email" placeholder="Email">
+                            <input class="info-input email" type="email" placeholder="Email" onchange="checkValidate()">
                             <p class="warning warning-mail">Nhập email của bạn!</p>
                         </div>
                         <div class="info">
                             <label class="info-label" for="">Số điện thoại</label>
-                            <input class="info-input phone" type="tel" placeholder="Số điện thoại">
+                            <input class="info-input phone" type="tel" placeholder="Số điện thoại" onchange="checkValidate()">
                             <p class="warning warning-phone">Nhập số điện thoại của bạn!</p>
                         </div>
                         <div class="info address">
                             <label class="info-label" for="">Địa chỉ</label>
-                            <select class="info-select province" onchange="getDistrictsByProvinceID()">
-                                <option value=''>Chọn Tỉnh</option>
+                            <select class="info-select province" onchange="getDistrictsByProvinceID(), checkValidate()" >
                             </select>
                             <p class="warning warning-province">Chọn Tỉnh của bạn!</p>
-                            <select class="info-select district" onchange="getWardsByDistrictsID()">
-                                <option value=''>Chọn Huyện</option>
+
+                            <select class="info-select district" onchange="getWardsByDistrictsID(), checkValidate()" >
                             </select>
                             <p class="warning warning-district">Chọn Huyện của bạn!</p>
-                            <select class="info-select ward">
-                                <option value=''>Chọn Xã</option>
+
+                            <select class="info-select ward" onchange="checkValidate()">
                             </select>
                             <p class="warning warning-ward">Chọn Xã của bạn!</p>
-                            <input class="info-input addressUser" type="text" placeholder="địa chỉ">
+                            
+                            <input class="info-input addressUser" type="text" placeholder="địa chỉ" onchange="checkValidate()">
                             <p class="warning warning-address">Nhập địa chỉ của bạn!</p>
                         </div>
                         <div class="info">
@@ -105,7 +105,8 @@
                         </div>
                     </div>
                     <div class="table-buy-btn">
-                        <button class="btn btn-accept" onclick="validate()">Xác nhận</button>
+                        <button class="btn btn-accept" onclick="checkOrder()">Xác nhận</button>
+
                         <button class="btn btn-exit" onclick="hanldBtnExitBuy()">Hủy</button>
                     </div>
                 </div>
@@ -113,8 +114,9 @@
         </div>
     </div>
     <script src="./assets/js/main.js"></script>
-    <script src="./assets/js/validate.js"></script>
     <script src="./assets/js/cart.js"></script>
+    <script src="./assets/js/validate.js"></script>
     <script src="./assets/js/formBuy.js"></script>
+    <script src="./assets/js/order.js"></script>
 </body>
 </html>

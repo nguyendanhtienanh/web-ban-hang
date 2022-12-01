@@ -1,0 +1,19 @@
+{
+  "name": "l0-front-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nguyendanhtienanh/web-ban-hang.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nguyendanhtienanh/web-ban-hang/issues"
+  },
+  "homepage": "https://github.com/nguyendanhtienanh/web-ban-hang#readme"
+}
