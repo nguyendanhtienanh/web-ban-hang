@@ -11,6 +11,15 @@
 
 }
 
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+li {
+    list-style-type: none;
+}
+
 html {
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -335,3 +344,28 @@ html {
 .close {
     display: none;
 }
+
+.order {
+    margin-top: 20px;
+}
+
+.head-product-order {
+
+}
+
+.head-product-order td {
+    width: 16.6666666667%;
+    text-align: center;
+    padding: 15px;
+}
+
+.order {
+    width: 100%;
+}
+
+.list-order td {
+    text-align: center;
+    padding: 15px;
+    width: 16.6666666667%;
+}
+

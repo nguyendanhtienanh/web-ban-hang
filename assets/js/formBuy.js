@@ -1,4 +1,4 @@
-function hanldBtnBuy() {
+    function hanldBtnBuy() {
     document.querySelector(".table-buy").classList.add("openFromBuy")
     getProvince();
 }

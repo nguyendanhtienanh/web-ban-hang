@@ -7,23 +7,25 @@ function getByIdSP() {
     const data = getDataLocal(keyLocalStorageListSP)
     const dataCart = getDataLocal(keyLocalStorageItemCart)
     const listProduct = [];
-    dataCart.forEach((itemCart) => {
-        data.forEach((item) => {
-            if(itemCart.id === item.id) {
-                listProduct.push(
-                    {
-                        id: item.id,
-                        img: item.img,
-                        name: item.name,
-                        price: item.price,
-                        quantity: itemCart.quantity,
-                        total: item.price*itemCart.quantity,
-                        max: item.quantity
-                    }
-                )
-            }
+    if(dataCart != null) {
+        dataCart.map((itemCart) => {
+            data.map((item) => {
+                if(itemCart.id === item.id) {
+                    listProduct.push(
+                        {
+                            id: item.id,
+                            img: item.img,
+                            name: item.name,
+                            price: item.price,
+                            quantity: itemCart.quantity,
+                            total: item.price*itemCart.quantity,
+                            max: item.quantity
+                        }
+                    )
+                }
+            })
         })
-    })
+    }
     return listProduct
 }
 
@@ -74,7 +76,7 @@ function handlTotal() {
         <p class="total-price">Thành tiền: ${totalPrice}</p>
          <div class="btn-buy">
             <button class="buy-btn" onclick="hanldBtnBuy()">Mua</button>
-            <button class="history-btn">Sản phẩm đã mua</button>
+            <button class="history-btn"><a href="./order.html">Sản phẩm đã mua</a></button>
         </div>
     `
     document.querySelector(".total-item").innerHTML = showTotal;

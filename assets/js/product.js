@@ -27,29 +27,42 @@ function CartObject (idCart, quantityCart) {
     this.quantity = quantityCart
 }
 
-function addSP(id, quantity, max) {
+function addSP(id, quantity = "", max = "") {
     let arr = localStorage.getItem(keyLocalStorageItemCart)
     if(arr) {
         arr = JSON.parse(arr)
     } else {
         arr = []
     }
-
+    let quantityTotal
+    const total = getDataLocal(keyLocalStorageListSP)
+    total.find((item) => {
+        if(item.id === id) {
+            quantityTotal = item.quantity;
+        }
+    })
+    
     const checkId = arr.find((item) => item.id === id)
-    if(!checkId) {
-        arr.push(new CartObject(id, quantity));
-        alert("Đã thêm sản phẩm vào giỏ hàng!");
-    } else {
-        arr.map((item) => {
-            if(item.id === id && item.quantity < max) {     
-                const quantityCart = item.quantity += 1;
-                alert("Đã thêm sản phẩm vào giỏ hàng!");
-                return (quantityCart)
-            }
-            if(item.id === id && item.quantity == max) {
-                alert("Sản phẩm đã hết hàng!")
-            }
-        })
+    if(quantityTotal != 0) {
+        if(!checkId) {
+            arr.push(new CartObject(id, quantity));
+            alert("Đã thêm sản phẩm vào giỏ hàng!");
+        }
+        else {
+            arr.map((item) => {
+                if(item.id === id && item.quantity < max) {     
+                    const quantityCart = item.quantity += 1;
+                    alert("Đã thêm sản phẩm vào giỏ hàng!");
+                    return (quantityCart)
+                }
+                if(item.id === id && item.quantity == max) {
+                    alert("Sản phẩm đã hết hàng!")
+                }
+            })
+        }
+    }
+    else {
+        alert("Sản phẩm đã hết hàng!")
     }
     localStorage.setItem(keyLocalStorageItemCart, JSON.stringify(arr))
 }

@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Header -->
+        <div id="header">
+
+            <ul id="nav">
+                <li><a href="./index.html">Trang chủ</a></li>
+                <li><a href="#">Sản phẩm</a></li>
+                <li><a href="#">Liên hệ</a></li>
+                <li><a href="#">Giới thiệu</a></li>
+            </ul>
+
+            <div class="search">
+                <input type="text" class="search-content" placeholder="Tìm kiếm sản phẩm...">
+                <i class="search-btn ti-search"></i>
+            </div>
+
+            <div class="cart">
+                <div class="cart-btn">
+                    <i class="ti-bag"></i>
+                    <a href="cart.html">Giỏ Hàng</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Content -->
+
+        <div id="content-cart">
+            <div class="list-item">
+                <p class="header-list-item">Sản phẩm đã mua</p>
+                <table class="order">
+                    <thead class="head-product-order">
+                        <tr class="tag-order">
+                            <td>id</td>
+                            <td>Name</td>
+                            <td>Ngày mua</td>
+                            <td>Số lượng sản phẩm</td>
+                            <td>Tổng tiền</td>
+                            <td>Xóa</td>
+                        </tr>
+                    </thead>
+                    <tbody class="list-order">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/cart.js"></script>
+    <script src="./assets/js/order.js"></script>
+    <script src="./assets/js/validate.js"></script>
+    <script src="./assets/js/formBuy.js"></script>
+</body>
+</html>

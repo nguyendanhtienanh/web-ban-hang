@@ -63,13 +63,13 @@ const keyLocalStorageListSP = "DANHSACHSP";
 const keyLocalStorageItemCart = "DANHSACHItemCart";
 
 // Bài 2
-function savaData (key, value) {
+function setDataLocal (key, value) {
     if(typeof listData === 'object') {
         localStorage.setItem(key, JSON.stringify(value));
     }
 }
 
-savaData(keyLocalStorageListSP, listData)
+// setDataLocal(keyLocalStorageListSP,listData)
 
 // Bài 3
 function getDataLocal (key) {
@@ -83,3 +83,6 @@ function getDataLocal (key) {
     return data
 }
 
+function deleteDataLocal (key) {
+    localStorage.removeItem(key);
+}

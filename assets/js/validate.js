@@ -159,48 +159,6 @@ function createRandomId() {
     return numberRandom();
 }
 
-
-function getInfoUser() {
-    let firstName = document.querySelector(".first-name").value
-    let lastName = document.querySelector(".last-name").value
-    let name = `${firstName} ${lastName}`
-
-    let address = document.querySelector(".addressUser").value
-    let listProvince = document.querySelector(".province");
-    let province = listProvince.options[listProvince.selectedIndex].text;
-    let listDistrict = document.querySelector(".district");
-    let district = listDistrict.options[listDistrict.selectedIndex].text;
-    let listWard = document.querySelector(".ward");
-    let ward = listWard.options[listWard.selectedIndex].text;
-
-    let addressUser = `${address}, ${ward}, ${district}, ${province}`
-    let infoUser = [];
-    infoUser.push({ 
-        nameUser: name,
-        addressUser: addressUser
-    })
-    return infoUser;
-}
-
-function getProductUser() {
-    const dataCart = getDataLocal(keyLocalStorageItemCart)
-    const data = getDataLocal(keyLocalStorageListSP)
-    let productUser = [];
-    dataCart.map((product) => {
-        data.map((item) => {
-            if(product.id === item.id) {
-                productUser.push({
-                    name: item.name,
-                    price: item.price,
-                    quantity: product.quantity,
-                    total: item.price*product.quantity
-                })
-            }
-        })
-    })
-    return productUser;
-}
-
 function getToday() {
     const time = new Date();
     const day = time.getDate();
@@ -210,22 +168,92 @@ function getToday() {
     return today;
 }
 
-function Order(id, day, info, product) {
+function infoUser (id, name, time, address) {
     this.id = id,
-    this.day = day,
-    this.info = info,
+    this.nameUser = name, 
+    this.time = time,
+    this.addressUser = address
+}
+
+function getInfoUser() {
+    const firstName = document.querySelector(".first-name").value
+    const lastName = document.querySelector(".last-name").value
+    let name = `${firstName} ${lastName}`
+
+    const address = document.querySelector(".addressUser").value
+    const listProvince = document.querySelector(".province");
+    const province = listProvince.options[listProvince.selectedIndex].text;
+    const listDistrict = document.querySelector(".district");
+    const district = listDistrict.options[listDistrict.selectedIndex].text;
+    const listWard = document.querySelector(".ward");
+    const ward = listWard.options[listWard.selectedIndex].text;
+
+    let id = createRandomId();
+    let time = getToday();
+
+    let addressUser = `${address}, ${ward}, ${district}, ${province}`
+
+    let info = new infoUser(id, name, time, addressUser)
+    return info;
+}
+
+function productUser (img, nameProduct, price, quantity, total) {
+    this.img = img,
+    this.nameProduct = nameProduct,
+    this.price = price,
+    this.quantity = quantity,
+    this.total = total
+}
+
+function getProductUser() {
+    const dataCart = getDataLocal(keyLocalStorageItemCart)
+    const data = getDataLocal(keyLocalStorageListSP)
+    let product
+    dataCart.map((productCart) => {
+        data.map((item) => {
+            if(productCart.id === item.id) {
+                let imgProduct = item.img
+                let nameProduct = item.name
+                let priceProduct = item.price
+                let quantityProduct = productCart.quantity
+                let totalProduct = item.price * productCart.quantity
+                
+                product = new productUser (imgProduct, nameProduct, priceProduct, quantityProduct, totalProduct)
+            }
+        })
+    })
+    return product;
+}
+
+
+
+function updateListProduct() {
+    const dataCart = getDataLocal(keyLocalStorageItemCart)
+    const data = getDataLocal(keyLocalStorageListSP)
+    dataCart.map((product) => {
+        data.map((item) => {
+            if(product.id === item.id) {
+                item.quantity = item.quantity - product.quantity;
+            }
+        })
+    })
+    setDataLocal(keyLocalStorageListSP, data)
+}
+
+function Order(info, product) {
+    this.info = info, 
     this.product = product
 }
 
 function getOrder() {
     const infoUser = getInfoUser();
     const productUser = getProductUser();
-    const id = createRandomId();
-    const today = getToday();
     let order = [];
-    order = new Order(id, today, infoUser, productUser)
+    order = new Order(infoUser, productUser)
     if(confirm("Xác nhận đặt hàng?") === true) {
-        return order
+        createOrder(order)
+        updateListProduct()
+        deleteDataLocal(keyLocalStorageItemCart)
     }
 }
 
@@ -235,6 +263,6 @@ function checkOrder() {
         return;
     }
     else {
-        console.log(getOrder())
+        getOrder();
     }
 }
