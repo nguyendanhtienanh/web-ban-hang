@@ -9,50 +9,38 @@ const getListOrder = async (api) => {
 
 const renderListOrder = async () => {
     const data = await getListOrder(listOrderAPI);
-    console.log(data)
-    const infoUser = data.map((user) => user.info)
-    console.log(infoUser)
-    const productUser = data.map((user) => user.product)
-    console.log(productUser)
-    const listBlock = document.querySelector(".list-order");
-
     let htmls = "";
-    data.map(() => {
-        infoUser.map((info) => {
-            productUser.map((product) => {
-                htmls += `
-                    <tr class="order">
-                        <td>${info.id}</td>
-                        <td>${info.nameUser}</td>
-                        <td>${info.time}</td>
-                        <td>${product.quantity}</td>
-                        <td>${product.total}</td>
-                        <td><i class="btn-trash ti-trash"></i></td>
-                    </tr>
-                    <tr class="details">
-                        <td>Ảnh</td>
-                        <td>Tên sản phẩm</td>
-                        <td>Giá tiền</td>
-                        <td>Số lượng sản phẩm</td>
-                        <td>Thành tiền</td>
-                    </tr>
-                        <tr class="details">
-                        <td><img src="${product.img}" alt="ảnh sản phẩm" class="img-product"></td>
-                        <td>${product.nameProduct}</td>
-                        <td>${product.price}</td>
-                        <td>${product.quantity}</td>
-                        <td>${product.quantity * product.price}</td>
-                    </tr>
-                `
+    data.map((user) => {
+            htmls += `
+                <tr class="order">
+                    <td>${user.info.id}</td>
+                    <td>${user.info.nameUser}</td>
+                    <td>${user.info.time}</td>
+                    <td>
+                        ${user.info.totalQuantity}
+                        <p class="detail-order-user" onclick="btnOpenDetail(${user.id})">chi tiết</p>
+                    </td>
+                    <td>${user.info.totalPrice}</td>
+                    <td><i class="btn-trash ti-trash" onclick="btnDeleteOrder(${user.id})"></i></td>
+                </tr>
+            `
+            user.product.map((item) => {
+                    htmls += `
+                        <tr class="body-details item${user.id}">
+                            <td><img src="${item.img}" alt="ảnh sản phẩm" class="img-product"></td>
+                            <td>${item.nameProduct}</td>
+                            <td>${item.price}</td>
+                            <td>${item.quantity}</td>
+                            <td>${item.quantity * item.price}</td>
+                        </tr>
+                    `
             })
-        })
     })
-    listBlock.innerHTML = htmls;
+
+    document.querySelector(".list-order").innerHTML = htmls;
+   
 }
 
-renderListOrder()
-
- 
 const createOrder = async (data) => {
     try {
         const reponse = await fetch(listOrderAPI, {
@@ -69,13 +57,13 @@ const createOrder = async (data) => {
         });
         let order = reponse.json();
         return order;
-    } catch(err) {
+    } catch (err) {
         alert(err);
     }
 }
 
 const deleteOrder = async (id) => {
-   try {
+    try {
         const reponse = await fetch(listOrderAPI + "/" + id, {
             method: 'DELETE',
             mode: 'cors',
@@ -89,7 +77,32 @@ const deleteOrder = async (id) => {
         });
         let order = reponse.json();
         return order;
-   } catch(err) {
+    } catch (err) {
         alert(err);
-   }
+    }
+}
+
+const btnDeleteOrder = async(id) => {
+    const data = await getListOrder(listOrderAPI);
+    console.log(data)
+    const dataLocal = getDataLocal(keyLocalStorageListSP)
+    console.log(dataLocal)
+    data.map((user) => {
+        user.product.map((item) => {
+            dataLocal.map((itemLocal) => {
+                if(item.nameProduct === itemLocal.name) {
+                    itemLocal.quantity = itemLocal.quantity + item.quantity
+                }
+            })
+        })
+    })
+    setDataLocal(keyLocalStorageListSP, dataLocal)
+    deleteOrder(id);
+}
+
+function btnOpenDetail(id) {
+    const detailsBlock = document.querySelectorAll(".item" + id)
+    detailsBlock.forEach((item) => {
+        item.classList.add("openDetail")
+    })
 }

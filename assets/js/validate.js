@@ -149,7 +149,8 @@ function checkProvinceDistrictWard() {
     return true
 }
 
-//Bài 11
+// Lấy dữ liệu đơn hang
+
 function createRandomId() {
     let random = Math.random()* 10000000000
     function numberRandom () {
@@ -168,11 +169,13 @@ function getToday() {
     return today;
 }
 
-function infoUser (id, name, time, address) {
+function infoUser (id, name, time, address, quantity, price) {
     this.id = id,
     this.nameUser = name, 
     this.time = time,
-    this.addressUser = address
+    this.addressUser = address,
+    this.totalQuantity = quantity,
+    this.totalPrice = price
 }
 
 function getInfoUser() {
@@ -188,12 +191,25 @@ function getInfoUser() {
     const listWard = document.querySelector(".ward");
     const ward = listWard.options[listWard.selectedIndex].text;
 
+    const dataCart = getDataLocal(keyLocalStorageItemCart)
+    const data = getDataLocal(keyLocalStorageListSP)
+    let totalQuantity = 0;
+    let totalPrice = 0;
+    dataCart.map((productCart) => {
+        data.map((item) => {
+            if(productCart.id === item.id) {
+                    totalQuantity += productCart.quantity;
+                    totalPrice += (item.price *  productCart.quantity)
+            }
+        })
+    })
+
     let id = createRandomId();
     let time = getToday();
 
     let addressUser = `${address}, ${ward}, ${district}, ${province}`
 
-    let info = new infoUser(id, name, time, addressUser)
+    let info = new infoUser(id, name, time, addressUser, totalQuantity, totalPrice)
     return info;
 }
 
@@ -208,23 +224,23 @@ function productUser (img, nameProduct, price, quantity, total) {
 function getProductUser() {
     const dataCart = getDataLocal(keyLocalStorageItemCart)
     const data = getDataLocal(keyLocalStorageListSP)
-    let product
+    let product = [];
     dataCart.map((productCart) => {
         data.map((item) => {
             if(productCart.id === item.id) {
-                let imgProduct = item.img
-                let nameProduct = item.name
-                let priceProduct = item.price
-                let quantityProduct = productCart.quantity
-                let totalProduct = item.price * productCart.quantity
-                
-                product = new productUser (imgProduct, nameProduct, priceProduct, quantityProduct, totalProduct)
+                const img =  item.img
+                const nameProduct = item.name
+                const price = item.price
+                const quantity = productCart.quantity
+                const total = item.price * productCart.quantity
+                product.push(
+                    new productUser(img, nameProduct, price, quantity, total)
+                )
             }
         })
     })
     return product;
 }
-
 
 
 function updateListProduct() {
@@ -250,6 +266,7 @@ function getOrder() {
     const productUser = getProductUser();
     let order = [];
     order = new Order(infoUser, productUser)
+    console.log(order)
     if(confirm("Xác nhận đặt hàng?") === true) {
         createOrder(order)
         updateListProduct()

@@ -347,10 +347,15 @@ html {
 
 .order {
     margin-top: 20px;
+    width: 100%;
 }
 
 .head-product-order {
+    
+}
 
+.tag-order {
+    background-color: rgba(220, 75, 75, 0.2);
 }
 
 .head-product-order td {
@@ -359,13 +364,25 @@ html {
     padding: 15px;
 }
 
-.order {
-    width: 100%;
-}
-
 .list-order td {
     text-align: center;
     padding: 15px;
     width: 16.6666666667%;
 }
 
+.head-details {
+    background-color: rgba(220, 75, 75, 0.2);
+}
+
+.body-details {
+    background-color: rgba(73, 226, 160, 0.2);
+    display: none;
+}
+
+.detail-order-user {
+    color: blue;
+}
+
+.openDetail {
+    display: table-row;
+}

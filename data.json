@@ -2,19 +2,37 @@
   "listOrder": [
     {
       "info": {
-        "id": 1233452869,
-        "nameUser": "nguyen van  a",
-        "time": "2/12/2022",
-        "addressUser": "xóm 1, Xã Chung Chải, Huyện Mường Nhé, Tỉnh Điện Biên"
+        "id": 9582268247,
+        "nameUser": "nguyễn thị  hà",
+        "time": "7/12/2022",
+        "addressUser": "xóm 9, Xã Tả Thàng, Huyện Mường Khương, Tỉnh Lào Cai",
+        "totalQuantity": 3,
+        "totalPrice": 143030
       },
-      "product": {
-        "img": "https://ressmedia.com/wp-content/uploads/2021/07/ANH-4-26.jpg",
-        "nameProduct": "giay 3",
-        "price": 5000,
-        "quantity": 1,
-        "total": 5000
-      },
-      "id": 1
+      "product": [
+        {
+          "img": "https://ressmedia.com/wp-content/uploads/2021/07/ANH-4-26.jpg",
+          "nameProduct": "giay 1",
+          "price": 1000,
+          "quantity": 1,
+          "total": 1000
+        },
+        {
+          "img": "https://ressmedia.com/wp-content/uploads/2021/07/ANH-4-26.jpg",
+          "nameProduct": "giay 5",
+          "price": 72000,
+          "quantity": 1,
+          "total": 72000
+        },
+        {
+          "img": "https://ressmedia.com/wp-content/uploads/2021/07/ANH-4-26.jpg",
+          "nameProduct": "giay 6",
+          "price": 70030,
+          "quantity": 1,
+          "total": 70030
+        }
+      ],
+      "id": 2
     }
   ]
 }
